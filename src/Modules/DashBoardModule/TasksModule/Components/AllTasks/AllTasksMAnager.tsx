@@ -1,20 +1,21 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
+  PROJECT_URLS,
   TASK_URLS,
   USERS_URL,
-  PROJECT_URLS,
 } from "../../../../../Services/Api/ApisUrls";
 import { http } from "../../../../../Services/Api/httpInstance";
-import { useNavigate } from "react-router-dom";
 import NoData from "../../../../../SharedComponents/Components/NoData/NoData";
 
-import styles from "./AllTasks.module.css";
 import { Button, Modal, Spinner } from "react-bootstrap";
-import DeleteConfirmation from "../../../../../SharedComponents/Components/DeleteConfirmation/DeleteConfirmation";
 import { toast } from "react-toastify";
-import PaginationBar from "../../../ProjectsModule/Components/AllProjects/PaginationBar";
-import SearchBox from "../../../ProjectsModule/Components/AllProjects/SearchBox";
+import DeleteConfirmation from "../../../../../SharedComponents/Components/DeleteConfirmation/DeleteConfirmation";
 import Header from "../../../../../SharedComponents/Components/Header/Header";
+import SearchBox from "../../../ProjectsModule/Components/AllProjects/SearchBox";
+import styles from "./AllTasks.module.css";
 //  التنسيقات الجديدة
 import globalStyles from "../../../../../GlobalTable.module.css";
 
@@ -23,8 +24,8 @@ type Task = {
   title: string;
   description: string;
   status: string;
-  employee: { id: number } | null;
-  project: { id: number } | null;
+  employee: { id: number; userName: string } | null;
+  project: { id: number; title: string } | null;
   creationDate: string;
 };
 
@@ -36,10 +37,9 @@ export default function AllTasksMAnager() {
   const [tasksList, setTasksList] = useState<Task[]>([]);
   const [users, setUsers] = useState<User[]>([]);
   const [projects, setProjects] = useState<Project[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
   const [showMenu, setShowMenu] = useState<number | null>(null);
-   const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -47,13 +47,14 @@ export default function AllTasksMAnager() {
   const [taskName, setTaskName] = useState("");
 
   const [showViewModal, setShowViewModal] = useState(false);
-  const [viewTask, setViewTask] = useState<any>(null);
+  const [viewTask, setViewTask] = useState<Task | null>(null);
   const [loadingView, setLoadingView] = useState(false);
 
   const [showStatusModal, setShowStatusModal] = useState(false);
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
   const [newStatus, setNewStatus] = useState("");
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [totalResults, setTotalResults] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
   const [pageNumber, setPageNumber] = useState(1);
@@ -89,14 +90,14 @@ export default function AllTasksMAnager() {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
-        }
+        },
       );
 
       // update UI instantly
       setTasksList((prev) =>
         prev.map((t) =>
-          t.id === selectedTask.id ? { ...t, status: newStatus } : t
-        )
+          t.id === selectedTask.id ? { ...t, status: newStatus } : t,
+        ),
       );
 
       toast.success("Status updated successfully");
@@ -128,7 +129,7 @@ export default function AllTasksMAnager() {
 
   const getAllTasks = async () => {
     try {
-       setIsLoading(true);
+      setIsLoading(true);
       const response = await http.get(TASK_URLS.GET_TASKS_BY_MANAGER, {
         params: { pageNumber: 1, pageSize: 10, title: search },
       });
@@ -139,8 +140,7 @@ export default function AllTasksMAnager() {
       console.error("Failed to load tasks", error);
       setTotalResults(0);
       setTotalPages(1);
-    }
-    finally {
+    } finally {
       setIsLoading(false);
     }
   };
@@ -160,19 +160,16 @@ export default function AllTasksMAnager() {
 
   const deleteTask = async () => {
     try {
-      
-      const response = await http.delete(TASK_URLS.DELETE_TASK(taskId), {
+      await http.delete(TASK_URLS.DELETE_TASK(taskId), {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-
-        
-        
       });
       handleClose();
-    toast.success("Task deleted successfully");
+      toast.success("Task deleted successfully");
       await getAllTasks();
-      
-
-    } catch (error) {}
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (error) {
+      /* empty */
+    }
   };
 
   useEffect(() => {
@@ -275,23 +272,21 @@ export default function AllTasksMAnager() {
               </tr>
             </thead>
             <tbody>
-
-                       {isLoading ? (
-   <div
-      className="position-absolute top-50 start-50 translate-middle"
-      style={{ zIndex: 10 }}
-    >
-      <Spinner animation="border" variant="success" />
-    </div>
-            ) : 
-              tasksList.length > 0 ? (
+              {isLoading ? (
+                <div
+                  className="position-absolute top-50 start-50 translate-middle"
+                  style={{ zIndex: 10 }}
+                >
+                  <Spinner animation="border" variant="success" />
+                </div>
+              ) : tasksList.length > 0 ? (
                 tasksList.map((task) => (
                   <tr key={task.id}>
                     <td>{task.title}</td>
                     <td>
                       <span
                         className={`${styles.statusBadge} ${getStatusClass(
-                          task.status
+                          task.status,
                         )}`}
                       >
                         {task.status}
@@ -415,7 +410,7 @@ export default function AllTasksMAnager() {
 
                 <span
                   className={`${styles.statusBadge} ${getStatusClass(
-                    task.status
+                    task.status,
                   )} mb-3`}
                   style={{ width: "fit-content" }}
                 >
@@ -454,26 +449,24 @@ export default function AllTasksMAnager() {
         </div>
       </div>
 
-  <Modal show={show} onHide={handleClose} centered size="lg">
-  <Modal.Header closeButton>
-    <Modal.Title>Delete Task</Modal.Title>
-  </Modal.Header>
+      <Modal show={show} onHide={handleClose} centered size="lg">
+        <Modal.Header closeButton>
+          <Modal.Title>Delete Task</Modal.Title>
+        </Modal.Header>
 
-  <Modal.Body className="py-3">
-    <DeleteConfirmation name={taskName} deleteItem="Task" />
-  </Modal.Body>
+        <Modal.Body className="py-3">
+          <DeleteConfirmation name={taskName} deleteItem="Task" />
+        </Modal.Body>
 
-  <Modal.Footer>
-    <Button variant="secondary" onClick={handleClose}>
-      Cancel
-    </Button>
-    <Button variant="danger" onClick={deleteTask}>
-      Delete
-    </Button>
-  </Modal.Footer>
-</Modal>
-
-      
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={deleteTask}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
 
       <Modal
         show={showStatusModal}
@@ -534,7 +527,7 @@ export default function AllTasksMAnager() {
                 <b>Status:</b>{" "}
                 <span
                   className={`${styles.statusBadge} ${getStatusClass(
-                    viewTask.status
+                    viewTask.status,
                   )}`}
                 >
                   {viewTask.status}
