@@ -1,31 +1,30 @@
-import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import "./App.css";
 
 import AuthLayout from "./SharedComponents/Components/AuthLayout/AuthLayout";
 import MasterLayout from "./SharedComponents/Components/MasterLayout/MasterLayout";
 import NotFound from "./SharedComponents/Components/NotFound/NotFound";
 
-import Welcome from "./Modules/AuthModule/Components/Welcome/Welcome";
 import Login from "./Modules/AuthModule/Components/Login/Login";
+import Welcome from "./Modules/AuthModule/Components/Welcome/Welcome";
 
 import VerifyAccount from "./Modules/AuthModule/Components/VerifyAccount/VerifyAccount";
 
-import DashBoard from "./Modules/DashBoardModule/Components/DashBoard/DashBoard";
-import ForgetPassword from "./Modules/AuthModule/Components/ForgetPassword/ForgetPassword";
-import ChangePassword from "./Modules/AuthModule/Components/ChangePassword/ChangePassword";
-import ResetPassord from "./Modules/AuthModule/Components/ResetPassword/ResetPassord";
-import CreateNewAccount from "./Modules/AuthModule/Components/CreateNewAccount/CreateNewAccount";
 import ProtectedRoute from "./Context/ProtectedRoute";
-import ProjectsSystem from "./Modules/DashBoardModule/ProjectsModule/Components/ProjectsSystem/ProjectsSystem";
+import ChangePassword from "./Modules/AuthModule/Components/ChangePassword/ChangePassword";
+import CreateNewAccount from "./Modules/AuthModule/Components/CreateNewAccount/CreateNewAccount";
+import ForgetPassword from "./Modules/AuthModule/Components/ForgetPassword/ForgetPassword";
+import ResetPassord from "./Modules/AuthModule/Components/ResetPassword/ResetPassord";
+import DashBoard from "./Modules/DashBoardModule/Components/DashBoard/DashBoard";
+import Profile from "./Modules/DashBoardModule/Components/Profile/Profile";
 import AllProjects from "./Modules/DashBoardModule/ProjectsModule/Components/AllProjects/AllProjects";
 import ProjectForm from "./Modules/DashBoardModule/ProjectsModule/Components/ProjectForm/ProjectForm";
-import Users from "./Modules/DashBoardModule/UsersModule/Components/Users/Users";
-import Profile from "./Modules/DashBoardModule/Components/Profile/Profile";
+import ProjectsSystem from "./Modules/DashBoardModule/ProjectsModule/Components/ProjectsSystem/ProjectsSystem";
 import AllTasks from "./Modules/DashBoardModule/TasksModule/Components/AllTasks/AllTasks";
-import TaskForm from "./Modules/DashBoardModule/TasksModule/Components/TaskForm/TaskForm";
-import TaskDetails from "./Modules/DashBoardModule/TasksModule/Components/TaskDetails/TaskDetails";
 import MyTasks from "./Modules/DashBoardModule/TasksModule/Components/MyTasks/MyTasks";
-import ThemeProvider from "./ThemeProvider";
+import TaskDetails from "./Modules/DashBoardModule/TasksModule/Components/TaskDetails/TaskDetails";
+import TaskForm from "./Modules/DashBoardModule/TasksModule/Components/TaskForm/TaskForm";
+import Users from "./Modules/DashBoardModule/UsersModule/Components/Users/Users";
 
 function App() {
   const routes = createBrowserRouter([
@@ -63,7 +62,7 @@ function App() {
         { path: "dashboard", element: <DashBoard /> },
 
         // Manager routes
-       { 
+       {
   path: "projects-system",
   element: (
     <ProtectedRoute allowedRoles={["Manager"]}>
@@ -77,35 +76,35 @@ function App() {
     <ProtectedRoute allowedRoles={["Manager"]}>
            <ProjectForm />
    </ProtectedRoute>) },
-        { path: "projects/edit/:id", element: 
+        { path: "projects/edit/:id", element:
          (
     <ProtectedRoute allowedRoles={["Manager"]}>
-        <ProjectForm /> 
+        <ProjectForm />
         </ProtectedRoute>)
-      
+
       },
         { path: "tasks", element: <AllTasks /> },
-        { path: "tasks/add", 
+        { path: "tasks/add",
 
-          
-          element: 
+
+          element:
               (
     <ProtectedRoute allowedRoles={["Manager"]}>
-          <TaskForm /> 
+          <TaskForm />
           </ProtectedRoute>)
 
-        
+
         },
-        { path: "tasks/edit/:id", element: 
+        { path: "tasks/edit/:id", element:
                 (
     <ProtectedRoute allowedRoles={["Manager"]}>
-          <TaskForm /> 
+          <TaskForm />
           </ProtectedRoute>)
       },
         { path: "tasks/:id", element: <TaskDetails /> },
         { path: "users", element:           (
     <ProtectedRoute allowedRoles={["Manager"]}>
-          <Users /> 
+          <Users />
           </ProtectedRoute>) },
         { path: "change-password", element: <ChangePassword /> },
 
@@ -119,9 +118,9 @@ function App() {
   ]);
 
 return (
-    
+
       <RouterProvider router={routes} />
-  
+
   );
 }
 

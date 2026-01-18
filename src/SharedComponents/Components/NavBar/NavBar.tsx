@@ -1,15 +1,15 @@
-import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import Swal from "sweetalert2";
-import { MdOutlineWbSunny } from "react-icons/md";
 import { BsMoonStarsFill } from "react-icons/bs";
 import { FiLock, FiLogOut } from "react-icons/fi";
 import { HiBell, HiChevronDown } from "react-icons/hi";
+import { MdOutlineWbSunny } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 // import type { AuthContextType } from "../../../Services/AuthContextType";
 import { useAuth } from "../../../Context/AuthContext";
 // import logo from "/public/navLogo.svg";
-import type { AuthContextType } from "../../../Services/AuthContextType";
 import { useMode } from "../../../Context/ModeContext";
+import type { AuthContextType } from "../../../Services/AuthContextType";
 import styles from "./NavBar.module.css";
 
 export default function NavBar() {
@@ -37,7 +37,7 @@ export default function NavBar() {
   return (
     <>
       <div
-        className="d-flex w-100 justify-content-between align-items-center shadow  py-2 
+        className="d-flex w-100 justify-content-between align-items-center shadow  py-2
        "
         style={{
             backgroundColor: darkMode ? "#222" : "#fff",
@@ -143,10 +143,10 @@ export default function NavBar() {
             </button>
             <ul className="dropdown-menu dropdown-menu-start shadow-lg">
               <li>
-             
+
                 <button
                   className={`dropdown-item d-flex align-items-center gap-2
-                   
+
                     `}
                   onClick={() => {
                     navigate("/dashboard/change-password");
@@ -157,7 +157,7 @@ export default function NavBar() {
                 </button>
               </li>
               <li>
-               
+
                 <button
                   className={`dropdown-item d-flex align-items-center gap-2 `}
                   style={{

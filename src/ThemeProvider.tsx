@@ -7,6 +7,7 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
   useEffect(() => {
     const saved = localStorage.getItem("site_theme");
     const isDark = saved === "dark";
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setDark(isDark);
     document.documentElement.setAttribute("data-bs-theme", isDark ? "dark" : "light");
   }, []);

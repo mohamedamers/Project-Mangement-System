@@ -1,13 +1,13 @@
 
-import { createContext, useContext, type PropsWithChildren } from "react";
-import { useState, useEffect } from "react";
+import axios from "axios";
+import { jwtDecode } from "jwt-decode";
+import { createContext, useContext, useEffect, useState, type PropsWithChildren } from "react";
 import type {
   AuthContextType,
   CurrentUserType,
   DecodedTokenPayload,
 } from "../Services/AuthContextType";
-import axios from "axios";
-import { jwtDecode } from "jwt-decode";
+// eslint-disable-next-line react-refresh/only-export-components
 export const AuthContext = createContext<AuthContextType | undefined>(
   undefined
 );
@@ -73,7 +73,7 @@ useEffect(() => {
   } else {
     setIsLoading(false);
   }
-}, []); 
+}, []);
 
 
   // value to provide
@@ -90,6 +90,7 @@ useEffect(() => {
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
+// eslint-disable-next-line react-refresh/only-export-components
 export function useAuth() {
   return useContext(AuthContext);
 }

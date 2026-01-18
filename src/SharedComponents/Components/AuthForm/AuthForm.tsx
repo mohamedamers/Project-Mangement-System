@@ -1,7 +1,12 @@
 import { useMemo, useState, type ReactNode } from "react";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
-import type { FieldValues, Path, RegisterOptions } from "react-hook-form";
+import type {
+  FieldValues,
+  Path,
+  RegisterOptions,
+  FieldErrors,
+} from "react-hook-form";
 import { useForm } from "react-hook-form";
 
 type InputType = "text" | "email" | "password" | "number" | "tel";
@@ -40,13 +45,12 @@ export default function AuthForm<TForm extends FieldValues>({
   const {
     register,
     handleSubmit,
-    formState: { errors  } , 
-   
-  } = useForm<TForm>({  });
+    formState: { errors },
+  } = useForm<TForm>({});
 
   const finalFields = useMemo(
     () => fields.filter((f) => !hideFields.includes(f.name)),
-    [fields, hideFields]
+    [fields, hideFields],
   );
 
   // show/hide لكل password field (لو عندك أكتر من واحد)
@@ -82,7 +86,7 @@ export default function AuthForm<TForm extends FieldValues>({
               <form onSubmit={handleSubmit(onSubmit)}>
                 {finalFields.map((field) => {
                   const nameStr = String(field.name);
-                  const fieldError = (errors as any)?.[nameStr];
+                  const fieldError = (errors as FieldErrors<TForm>)?.[nameStr];
                   const isPassword = field.type === "password";
                   const show = !!showMap[nameStr];
 

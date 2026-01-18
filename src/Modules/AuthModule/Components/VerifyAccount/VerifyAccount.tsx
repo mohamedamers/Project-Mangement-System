@@ -1,33 +1,38 @@
+import type { AxiosError } from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { http } from "../../../../Services/Api/httpInstance";
 import type { AuthField } from "../../../../SharedComponents/Components/AuthForm/AuthForm";
 import AuthForm from "../../../../SharedComponents/Components/AuthForm/AuthForm";
-import { http } from "../../../../Services/Api/httpInstance";
-import { Navigate, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 
 type VerifyAccountForm = {
   email: string;
-  code: string; 
+  code: string;
 };
 
 export default function ResetPassword() {
   const [loading] = useState(false);
-  let navigate = useNavigate();
-  const onSubmit =  async (data: VerifyAccountForm) => {
-     try {
-          let response = await http.put("https://upskilling-egypt.com:3003/api/v1/Users/verify",
-            data
-          );
-          
-          navigate("/auth/login");
-          toast.success("Account verifyied successfully ", {
-            position: "top-right",
-            autoClose: 4000,
-            theme: "light",
-          });
-        } catch (error) {
-          toast.error(error.response.data.message);
-        }
+  const navigate = useNavigate();
+  const onSubmit = async (data: VerifyAccountForm) => {
+    try {
+      await http.put(
+        "https://upskilling-egypt.com:3003/api/v1/Users/verify",
+        data,
+      );
+
+      navigate("/auth/login");
+      toast.success("Account verifyied successfully ", {
+        position: "top-right",
+        autoClose: 4000,
+        theme: "light",
+      });
+    } catch (error) {
+      const errorMessage =
+        (error as AxiosError<{ message: string }>).response?.data?.message ||
+        "An error occurred";
+      toast.error(errorMessage);
+    }
     console.log("VerifyAccount submit", data);
   };
 

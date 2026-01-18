@@ -1,35 +1,30 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FaProjectDiagram } from "react-icons/fa";
 import {
   MdChecklist,
   MdOutlineWork,
   MdPeople,
   MdSpaceDashboard,
-  MdTaskAlt,
 } from "react-icons/md";
-import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
+import { Menu, MenuItem, Sidebar } from "react-pro-sidebar";
 import { Link, useLocation } from "react-router-dom";
-import type { AuthContextType } from "../../../Services/AuthContextType";
 import { useAuth } from "../../../Context/AuthContext";
+import type { AuthContextType } from "../../../Services/AuthContextType";
 // import { useAuth } from "../../../Context/AuthContext";
 // import type { AuthContextType } from "../../../Services/AuthContextType";
 
 export default function SideBar() {
   const location = useLocation();
-  const [isCollapse, setIsCollapse] = useState(false);
+  const [isCollapse, setIsCollapse] = useState(() => {
+    const storedIsCollapse = localStorage.getItem("isCollapse");
+    return storedIsCollapse !== null ? JSON.parse(storedIsCollapse) : false;
+  });
   const { loginData }: AuthContextType = useAuth()!;
 
   const handleCollapse = () => {
     setIsCollapse(!isCollapse);
     localStorage.setItem("isCollapse", String(!isCollapse));
   };
-
-  useEffect(() => {
-    const storedIsCollapse = localStorage.getItem("isCollapse");
-    if (storedIsCollapse !== null) {
-      setIsCollapse(JSON.parse(storedIsCollapse));
-    }
-  }, []);
 
   return (
     <>
@@ -115,8 +110,6 @@ export default function SideBar() {
             >
               All Tasks
             </MenuItem>
-
-         
           </Menu>
         </Sidebar>
       </div>
