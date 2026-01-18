@@ -1,0 +1,12 @@
+import axios from "axios";
+
+export function createHttpClient(baseURL:string) {
+  const http= axios.create({ baseURL });
+   http.interceptors.request.use((config) => {
+    const token = localStorage.getItem("token");
+    if (token) config.headers.Authorization = `Bearer ${token}`;
+    return config;
+  });
+
+  return http;
+}

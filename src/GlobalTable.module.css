@@ -1,0 +1,99 @@
+.tableContainer :global(.table-responsive) {
+}
+
+.tableResponsive {
+    composes: table-responsive from global;
+}
+
+@media (max-width: 767px) {
+    .tableResponsive {
+        font-size: 0.875rem;
+    }
+
+    .tableResponsive th,
+    .tableResponsive td {
+        padding: 0.5rem !important;
+        white-space: nowrap;
+    }
+
+    .marginFix {
+        margin-left: 1rem !important;
+        margin-right: 1rem !important;
+    }
+
+    .title {
+        font-size: 1.25rem !important;
+    }
+}
+
+/* Scrollbar Styles */
+.tableResponsive::-webkit-scrollbar {
+    height: 6px;
+}
+
+.tableResponsive::-webkit-scrollbar-track {
+    background: var(--scrollbar-track, #f1f1f1);
+}
+
+.tableResponsive::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb, #888);
+    border-radius: 3px;
+}
+
+/* Loading & Empty State */
+.loadingOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    border-radius: 8px;
+}
+
+.emptyState {
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* استهداف الحاوية الجديدة */
+.header-wrapper {
+    width: 100%;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+/* استهداف الزرار داخل الهيدر */
+.header-wrapper header button {
+    transition: all 0.3s ease-in-out;
+    white-space: nowrap; /* يمنع النص إنه ينزل سطرين */
+}
+
+/* لما الشاشة تكون في حدود 1200px (وقت زحمة السايدبار) */
+@media (max-width: 1250px) {
+    .header-wrapper header button {
+        padding: 6px 15px !important; /* تقليل الحشو */
+        font-size: 14px !important;   /* تصغير الخط */
+        transform: scale(0.9);        /* تصغير الحجم بنسبة 10% */
+        transform-origin: right;      /* التصغير يلم ناحية اليمين */
+    }
+    
+    .header-wrapper header h3 {
+        font-size: 1.5rem !important; /* تصغير العنوان شوية لو لسه خبط في الزرار */
+    }
+}
+
+/* للموبايل */
+@media (max-width: 768px) {
+    .header-wrapper header button {
+        padding: 5px 10px !important;
+        transform: scale(0.85);
+        font-size: 12px !important;
+    }
+}

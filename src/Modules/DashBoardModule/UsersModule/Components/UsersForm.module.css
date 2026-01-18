@@ -1,0 +1,269 @@
+.container {
+    padding: 20px;
+}
+
+.header {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+/* Search Section */
+.searchSection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.searchContainer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.searchInputWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.searchIcon {
+    position: absolute;
+    left: 12px;
+    color: #888;
+}
+
+.searchInput {
+    padding: 8px 12px 8px 36px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    width: 250px;
+    outline: none;
+}
+
+.filterButton {
+    padding: 8px 20px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #4f4f4f;
+}
+
+.tableContainer {
+    background-color: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tableHeader {
+    background-color: #436257;
+}
+
+.tableHeaderCell {
+    padding: 20px 16px;
+    text-align: left;
+    font-weight: 400;
+    font-size: 14px;
+    color: #ffffff;
+}
+
+.sortIcon {
+    display: inline-block;
+    margin-left: 8px;
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+.tableRow {
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.tableCell {
+    padding: 16px;
+    font-size: 14px;
+    color: #555;
+}
+
+.paginationContainer {
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 40px;
+    font-size: 14px;
+    color: #666;
+}
+
+.paginationLeft {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.pageSizeWrapper {
+    border: 1px solid #d1d5db;
+    border-radius: 20px;
+    padding: 2px 10px;
+    background: white;
+}
+
+.pageSizeSelect {
+    border: none;
+    outline: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 2px 4px;
+}
+
+.paginationRight {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.paginationControls {
+    display: flex;
+    gap: 20px;
+}
+
+.pageArrow {
+    background: none;
+    border: none;
+    font-size: 22px;
+    color: #aaa;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
+
+.pageArrow:disabled {
+    color: #eee;
+}
+
+/* Status Badges */
+.statusBadge {
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.statusActive {
+    color: #059669;
+    background-color: #d1fae5;
+}
+
+.statusNotActive {
+    color: #dc2626;
+    background-color: #fee2e2;
+}
+
+/* Action Menu */
+.actionButton {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #1f352b;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.actionMenu {
+    position: absolute;
+    right: 10px;
+    top: 40px;
+    background: white;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    
+}
+
+.menuItem {
+    display: block;
+    width: 100%;
+    padding: 10px 20px;
+    border: none;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+}
+
+.actionButton:focus, 
+.actionButton:active,
+.actionButton:hover {
+  background-color: transparent !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* حل مشكلة اللون الأبيض في النقاط */
+.dotsWrapper {
+  cursor: pointer;
+  padding: 5px 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+  background: transparent !important; /* ضمان الشفافية */
+  border-radius: 4px;
+}
+
+.dotsWrapper:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* تنسيق الكارت ليكون غامق مثل الصورة */
+.cardCustom {
+  background-color: #1a1d21 !important; /* لون غامق احترافي */
+  color: #ffffff !important;
+  border: 1px solid #2d3238 !important;
+}
+
+.labelMuted {
+  color: #9ea5ad !important; /* لون رمادي خفيف للعناوين */
+}
+
+/* القائمة المنبثقة غامقة */
+.actionMenuCustom {
+  position: absolute;
+  right: 0;
+  top: 30px;
+  background-color: #212529;
+  border: 1px solid #444;
+  border-radius: 6px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+  z-index: 1050;
+  min-width: 130px;
+  overflow: hidden;
+}
+
+.menuItem {
+  width: 100%;
+  padding: 10px 15px;
+  background: none;
+  border: none;
+  color: #fff;
+  text-align: left;
+  display: block;
+  font-size: 14px;
+}
+
+.menuItem:hover {
+  background-color: #343a40;
+}

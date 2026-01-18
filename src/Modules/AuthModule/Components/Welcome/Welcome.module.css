@@ -1,0 +1,56 @@
+.herobg {
+  background-color: #0f3b35 !important;
+  height: 100vh;
+ 
+}
+
+
+.logo-text {
+  color: #f6a11a;
+  font-size: 56px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+
+.letter-space {
+  letter-spacing: 2px;
+  font-size: 11px;
+  opacity: 0.85;
+}
+
+
+.corner {
+  position: absolute;
+
+  overflow: hidden;
+  z-index: 1;
+}
+
+.topright {
+  top: -30px;
+  right: -30px;
+ 
+}
+
+
+.bottomleft {
+  bottom: -30px;
+  left: -30px;
+ 
+}
+
+@media (max-width: 768px) {
+  .hero-bs {
+    height: 320px;
+  }
+
+  .corner {
+    width: 220px;
+    height: 160px;
+  }
+
+  .logo-text {
+    font-size: 44px;
+  }
+}

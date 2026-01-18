@@ -1,0 +1,33 @@
+.toggleContainer {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: all 0.3s ease;
+  color: #ef9b28;
+  font-size: 1.25rem; /* equivalent to fs-4 */
+}
+
+.iconVisible {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+.iconHidden {
+  opacity: 0;
+  transform: scale(0.5) rotate(-90deg);
+}
+
+.sun {
+  transform-origin: center;
+}
+
+.moon {
+  transform-origin: center;
+}

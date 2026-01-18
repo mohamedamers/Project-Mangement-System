@@ -1,0 +1,63 @@
+.herobg {
+  background-color: #0f3b35 !important;
+  height: 100vh;
+  /* background-image: url("../../../assets/images/auth1.png");
+ background-repeat: no-repeat;
+ background-position: left bottom; */
+}
+
+
+/* Logo */
+.logo-text {
+  color: #f6a11a;
+  font-size: 56px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+/* subtitle spacing */
+.letter-space {
+  letter-spacing: 2px;
+  font-size: 11px;
+  opacity: 0.85;
+}
+
+/* corner images */
+.corner {
+  position: absolute;
+
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* top right */
+.topright {
+  background-size: cover;
+  top: -100px;
+  right: -100px;
+ 
+}
+
+/* bottom left */
+.bottomleft {
+    background-size: cover;
+  bottom: -100px;
+  left: -100px;
+ 
+}
+
+/* responsive */
+@media (max-width: 768px) {
+  .hero-bs {
+    height: 320px;
+  }
+
+  .corner {
+    width: 220px;
+    height: 160px;
+  }
+
+  .logo-text {
+    font-size: 44px;
+  }
+}
