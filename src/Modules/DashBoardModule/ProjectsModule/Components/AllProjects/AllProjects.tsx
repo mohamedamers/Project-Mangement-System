@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
-import { getManagerProjectsFun } from "./getManagerProjects";
+import { Button, Modal } from "react-bootstrap";
+import Spinner from "react-bootstrap/Spinner";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../../../Context/AuthContext";
+import { useMode } from "../../../../../Context/ModeContext";
+import { USERS_URL } from "../../../../../Services/Api/ApisUrls";
+import { http } from "../../../../../Services/Api/httpInstance";
+import DeleteConfirmation from "../../../../../SharedComponents/Components/DeleteConfirmation/DeleteConfirmation";
 import Header from "../../../../../SharedComponents/Components/Header/Header";
 import NoData from "../../../../../SharedComponents/Components/NoData/NoData";
-import SearchBox from "./SearchBox";
+import { getManagerProjectsFun } from "./getManagerProjects";
 import PaginationBar from "./PaginationBar";
-import { Button, Modal } from "react-bootstrap";
-import DeleteConfirmation from "../../../../../SharedComponents/Components/DeleteConfirmation/DeleteConfirmation";
-import { http } from "../../../../../Services/Api/httpInstance";
-import { USERS_URL } from "../../../../../Services/Api/ApisUrls";
-import { useNavigate } from "react-router-dom";
-import Spinner from "react-bootstrap/Spinner";
-import { useMode } from "../../../../../Context/ModeContext";
-import { useAuth } from "../../../../../Context/AuthContext";
+import SearchBox from "./SearchBox";
 
 // التنسيقات الجديدة
 import globalStyles from "../../../../../GlobalTable.module.css";
